@@ -3,11 +3,11 @@ Florida Poly SE Project
 
 Group project for the Software Engineering course [SU A 2020_CEN4010.01 ENGR]. A Sudoku application
 
-##Overview:
+### Overview:
+* A simple Sudoku application that can be played.
 
+### How to use:
+* Coming soon
 
-##How to use:
-* Bullet points of how to use the stuff
-
-##Authors:
+### Authors:
 * Brandon Endres, Nicholas Sardano, Vicente Ramos, Scott Swiatek
