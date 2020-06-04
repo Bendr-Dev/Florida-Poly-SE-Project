@@ -1,10 +1,10 @@
 Florida Poly SE Project
 ===============
 
-Group project for the Software Engineering course [SU A 2020_CEN4010.01 ENGR]. A Sudoku main
+Group project for the Software Engineering course [SU A 2020_CEN4010.01 ENGR]. A Sudoku application
 
 ### Overview:
-* A simple Sudoku main that can be played.
+* A simple Sudoku application that can be played.
 
 ### How to use:
 * Coming soon
