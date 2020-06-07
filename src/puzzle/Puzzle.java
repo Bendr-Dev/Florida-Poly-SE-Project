@@ -1,5 +1,7 @@
 package puzzle;
 
+import java.util.Random;
+
 public class Puzzle {
     // Class variables //
     private final int GRID_SIZE = 9;
@@ -22,6 +24,26 @@ public class Puzzle {
             for (int col = 0; col < GRID_SIZE; col++) {
                 puzzle[row][col] = new PuzzlePiece();
             }
+        }
+    }
+
+    /** Inserts 17 random values (1 through 9) into the puzzle at random locations on the grid */
+    private void insertRandomValues() {
+        Random randomValue = new Random();
+
+        // Minimum amount of values to get 1 unique solution = 17 //
+        for (int puzzlePiece = 0; puzzlePiece < 17; puzzlePiece++) {
+            int nextValue = randomValue.nextInt(9) + 1;
+            int nextRow = randomValue.nextInt(9);
+            int nextCol = randomValue.nextInt(9);
+
+            // Check validity of value and location until valid //
+            while(!isValueValid(nextRow, nextCol, nextValue)) {
+                nextValue = randomValue.nextInt(9) + 1;
+                nextRow = randomValue.nextInt(9);
+                nextCol = randomValue.nextInt(9);
+            }
+            puzzle[nextRow][nextCol].setValue(nextValue);
         }
     }
 
