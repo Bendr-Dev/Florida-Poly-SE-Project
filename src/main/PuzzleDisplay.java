@@ -19,7 +19,7 @@ public class PuzzleDisplay extends Parent {
     /**
      * Constructor
      *
-     *
+     * Creates a new puzzle given difficulty and creates the display for the puzzle
      */
     public PuzzleDisplay(String difficulty) {
         puzzle = new Puzzle(difficulty);
@@ -90,7 +90,7 @@ public class PuzzleDisplay extends Parent {
         if(puzzlePiece.getShowing()) {
             isEditable = false;
             displayTextArea.appendText("" + puzzlePiece.getValue());
-            displayTextArea.setStyle("-fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
+            displayTextArea.setStyle("-fx-control-inner-background:#F9F8F8; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
         } else {
             isEditable = true;
         }
@@ -133,12 +133,12 @@ public class PuzzleDisplay extends Parent {
 
             // Helper function to determine is the value input valid
             if (isValid(rowSelect, colSelect)) {
-                source.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
+                source.setStyle("-fx-control-inner-background:#4FB477; -fx-focus-color: rgba(241,80,37,0.2); -fx-faint-focus-color: #F15025;");
             } else {
-                source.setBackground(new Background(new BackgroundFill(Color.RED, null,null)));
+                source.setStyle("-fx-control-inner-background:#E63946; -fx-focus-color: rgba(241,80,37,0.2); -fx-faint-focus-color: #F15025;");
             }
         } else {
-            source.setBackground(new Background(new BackgroundFill(Color.WHITE, null,null)));
+            source.setStyle("-fx-focus-color: rgba(241,80,37,0.2); -fx-faint-focus-color: #F15025;");
         }
     }
 
