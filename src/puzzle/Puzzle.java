@@ -15,7 +15,16 @@ public class Puzzle {
      *  difficulty (String): Amount of hints to be generated, determined by user
      */
     public Puzzle(String difficulty) {
+        // Initialze 2D array and insert values //
+        initPuzzle();
+        insertRandomValues();
 
+        // Check solubility of puzzle and insert new values until solvable //
+        while(!isSolvable()) {
+            initPuzzle();
+            insertRandomValues();
+        }
+        selectHintValues(difficulty);
     }
 
     /** Generates a blank 9x9 puzzle filled with (81) PuzzlePieces */
@@ -24,6 +33,40 @@ public class Puzzle {
             for (int col = 0; col < GRID_SIZE; col++) {
                 puzzle[row][col] = new PuzzlePiece();
             }
+        }
+    }
+
+    /**
+     * Selects random points on array to show based off of user-selected difficulty
+     * @param difficulty (String): 'EASY', 'MEDIUM', 'HARD'
+     */
+    private void selectHintValues(String difficulty) {
+        Random random = new Random();
+        int hintValueAmount = 0;
+
+        // Decides how many hints to give (randomized lee-way)
+        switch (difficulty) {
+            case "EASY":
+                hintValueAmount = random.nextInt(5) + 28;
+                break;
+            case "MEDIUM":
+                hintValueAmount = random.nextInt(5) + 23;
+                break;
+            case "HARD":
+                hintValueAmount = random.nextInt(5) + 17;
+        }
+
+        // Select hints randomly on grid after determining amount of hint //
+        for(int hints = 0; hints < hintValueAmount; hints++) {
+            int randomRow = random.nextInt(9);
+            int randomCol = random.nextInt(9);
+
+            // Check validity of showing until valid //
+            while(puzzle[randomRow][randomCol].getShowing()) {
+                randomRow = random.nextInt(9);
+                randomCol = random.nextInt(9);
+            }
+            puzzle[randomRow][randomCol].setShowing(true);
         }
     }
 
@@ -48,11 +91,54 @@ public class Puzzle {
     }
 
     /**
+     * Locates a blank PuzzlePiece (value of 0) and assigns a value starting from 1 to it.
+     * Checks if that value is valid, then recursively calls the method again and
+     * keeps inserting random values until puzzle is solved. If no values can be possible on
+     * a puzzle piece, method goes back and changes previous value
+     * @return (boolean): true if puzzle is solvable, false otherwise
+     */
+    private boolean isSolvable() {
+        boolean isEmpty = true;
+        int row = -1;
+        int col = -1;
+
+        // Traverse through array to find blank PuzzlePiece //
+        for(int findRow = 0; findRow < GRID_SIZE; findRow++) {
+            for(int findCol = 0; findCol < GRID_SIZE; findCol++) {
+                if(puzzle[findRow][findCol].getValue() == 0){
+                    row = findRow;
+                    col = findCol;
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if(!isEmpty)
+                break;
+        }
+        if(isEmpty)
+            return true; // No more blank pieces, puzzle is solved //
+
+        // Assigns a value to the PuzzlePiece,  //
+        // and checks if it's valid by making the recursive call (goes to next value) //
+        for(int value = 1; value <= 9; value++) {
+            if(isValueValid(row, col, value)) {
+                puzzle[row][col].setValue(value);
+                if(isSolvable()) {
+                    return true;
+                } else {
+                    puzzle[row][col].setValue(0);
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Checks value with the row, column, and 3x3 sub-grid to ensure value is valid
      * @param row (int): row that the value is on
      * @param col (int): column that the value is on
      * @param value (int): the value inputted
-     * @return (boolean): True if value is valid, false if value is invalid
+     * @return (boolean): true if value is valid, false if value is invalid
      */
     private boolean isValueValid(int row, int col, int value) {
         int subPuzzleRowStart = row - (row % 3);
@@ -77,7 +163,6 @@ public class Puzzle {
                     return false;
             }
         }
-
         return true; // True if no value conflicted with the value being checked //
     }
 }
