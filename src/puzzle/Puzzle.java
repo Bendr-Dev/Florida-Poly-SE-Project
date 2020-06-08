@@ -7,7 +7,6 @@ public class Puzzle {
     private final int GRID_SIZE = 9;
     private PuzzlePiece[][] puzzle = new PuzzlePiece[9][9];
 
-
     /**
      * Constructor
      *
@@ -27,6 +26,7 @@ public class Puzzle {
         selectHintValues(difficulty);
     }
 
+
     /** Generates a blank 9x9 puzzle filled with (81) PuzzlePieces */
     private void initPuzzle() {
         for (int row = 0; row < GRID_SIZE; row++) {
@@ -35,6 +35,7 @@ public class Puzzle {
             }
         }
     }
+
 
     /**
      * Selects random points on array to show based off of user-selected difficulty
@@ -70,6 +71,7 @@ public class Puzzle {
         }
     }
 
+
     /** Inserts 17 random values (1 through 9) into the puzzle at random locations on the grid */
     private void insertRandomValues() {
         Random randomValue = new Random();
@@ -89,6 +91,7 @@ public class Puzzle {
             puzzle[nextRow][nextCol].setValue(nextValue);
         }
     }
+
 
     /**
      * Locates a blank PuzzlePiece (value of 0) and assigns a value starting from 1 to it.
@@ -133,6 +136,7 @@ public class Puzzle {
         return false;
     }
 
+
     /**
      * Checks value with the row, column, and 3x3 sub-grid to ensure value is valid
      * @param row (int): row that the value is on
@@ -164,5 +168,16 @@ public class Puzzle {
             }
         }
         return true; // True if no value conflicted with the value being checked //
+    }
+
+
+    /**
+     * Gets a puzzle piece from specified location on array
+     * @param row (int): Location of puzzle piece by row
+     * @param col (int): Location of puzzle piece by column
+     * @return (PuzzlePiece): puzzle piece given location
+     */
+    public PuzzlePiece getPuzzlePiece(int row, int col) {
+        return puzzle[row][col];
     }
 }
