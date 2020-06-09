@@ -3,10 +3,7 @@ package main;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -38,7 +35,7 @@ public class Application extends javafx.application.Application {
         currentDifficultyLabel.setStyle("-fx-font: 14px 'Arial'; -fx-text-fill: #FFFFFF; -fx-padding: 2 2 2 2;");
 
 
-        // Create radio buttons and toggle group
+        // Create radio buttons and toggle group //
         GridPane radioButtonGridPane = new GridPane();
         radioButtonGridPane.addColumn(0);
 
@@ -58,12 +55,12 @@ public class Application extends javafx.application.Application {
         radioButtonGridPane.setVgap(30);
         radioButtonGridPane.setAlignment(Pos.CENTER);
 
-        // Create in toggle group
+        // Create in toggle group //
         easyRB.setToggleGroup(difficultyGroup);
         mediumRB.setToggleGroup(difficultyGroup);
         hardRB.setToggleGroup(difficultyGroup);
 
-        // Create button to start game with selected difficulty
+        // Create button to start game with selected difficulty //
         Button startGameButton = new Button("New Game");
         startGameButton.setStyle("-fx-base:#FFFFFF; -fx-font: 20px 'Arial';");
         startGameButton.setDisable(true);
@@ -74,7 +71,7 @@ public class Application extends javafx.application.Application {
         userPanel.getChildren().add(startGameButton);
         userPanel.setAlignment(Pos.TOP_CENTER);
 
-        // Handle difficulty selection
+        // Handle difficulty selection //
         difficultyGroup.selectedToggleProperty().addListener((observableValue, toggle, t1) -> {
             try {
                 RadioButton selectedRB = (RadioButton) difficultyGroup.getSelectedToggle();
@@ -84,7 +81,7 @@ public class Application extends javafx.application.Application {
             } catch(NullPointerException ignored) { }
         });
 
-        // Handle creating a new puzzle
+        // Handle creating a new puzzle //
         startGameButton.setOnAction((actionEvent) -> {
             try {
                 difficultyGroup.getSelectedToggle().setSelected(false);

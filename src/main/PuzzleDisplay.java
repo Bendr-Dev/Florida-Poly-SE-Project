@@ -93,6 +93,7 @@ public class PuzzleDisplay extends Parent {
             displayTextArea.setStyle("-fx-control-inner-background:#F9F8F8; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
         } else {
             isEditable = true;
+            displayTextArea.appendText("");
         }
 
         // Handles user value input //
@@ -100,6 +101,8 @@ public class PuzzleDisplay extends Parent {
             if(isValueEnteredValid(keyEvent) && isEditable) {
                 displayTextArea.setText(keyEvent.getText());
                 checkPuzzleValidity(keyEvent);
+                if(isSolved())
+                    onCompletion();
             } else if(keyEvent.getCode().getName().equals("Backspace") && isEditable && displayTextArea.getText().length() != 0) {
                 displayTextArea.deleteText(0, 1);
                 checkPuzzleValidity(keyEvent);
@@ -201,5 +204,28 @@ public class PuzzleDisplay extends Parent {
     @Override
     public Node getStyleableNode() {
         return puzzleDisplayGrid;
+    }
+
+    /** Checks if puzzle has been successfully completed */
+    private boolean isSolved() {
+        for (int row = 0; row < GRID_SIZE; row++) {
+            for (int col = 0; col < GRID_SIZE; col++) {
+                TextArea checkPiece = (TextArea) getNode(row, col);
+                assert checkPiece != null;
+                if(!isValid(row, col) || checkPiece.getText().equals(""))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    private void onCompletion() {
+        try {
+            for (int row = 0; row < GRID_SIZE; row++) {
+                for (int col = 0; col < GRID_SIZE; col++) {
+                    getNode(row, col).setDisable(true);
+                }
+            }
+        } catch (IllegalMonitorStateException ignored ) { }
     }
 }
