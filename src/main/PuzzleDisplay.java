@@ -206,6 +206,7 @@ public class PuzzleDisplay extends Parent {
         return puzzleDisplayGrid;
     }
 
+
     /** Checks if puzzle has been successfully completed */
     private boolean isSolved() {
         for (int row = 0; row < GRID_SIZE; row++) {
@@ -219,6 +220,8 @@ public class PuzzleDisplay extends Parent {
         return true;
     }
 
+
+    /** Disables all pieces on grid */
     private void onCompletion() {
         try {
             for (int row = 0; row < GRID_SIZE; row++) {
@@ -226,6 +229,6 @@ public class PuzzleDisplay extends Parent {
                     getNode(row, col).setDisable(true);
                 }
             }
-        } catch (IllegalMonitorStateException ignored ) { }
+        } catch ( IllegalMonitorStateException ignored ) { }
     }
 }
