@@ -48,13 +48,13 @@ public class Puzzle {
         // Decides how many hints to give (randomized lee-way)
         switch (difficulty) {
             case "EASY":
-                hintValueAmount = random.nextInt(5) + 28;
+                hintValueAmount = random.nextInt(5) + 35;
                 break;
             case "MEDIUM":
-                hintValueAmount = random.nextInt(5) + 23;
+                hintValueAmount = random.nextInt(5) + 29;
                 break;
             case "HARD":
-                hintValueAmount = random.nextInt(5) + 17;
+                hintValueAmount = random.nextInt(5) + 23;
         }
 
         // Select hints randomly on grid after determining amount of hint //
@@ -77,7 +77,7 @@ public class Puzzle {
         Random randomValue = new Random();
 
         // Minimum amount of values to get 1 unique solution = 17 //
-        for (int puzzlePiece = 0; puzzlePiece < 17; puzzlePiece++) {
+        for (int puzzlePiece = 0; puzzlePiece < 18; puzzlePiece++) {
             int nextValue = randomValue.nextInt(9) + 1;
             int nextRow = randomValue.nextInt(9);
             int nextCol = randomValue.nextInt(9);
