@@ -17,8 +17,6 @@ Each row, column, and sub-grid (3x3 grid within the 9x9) can only contain one of
     
     * Set terminal to use git bash shell
     
-        ![alt-text](resources/img/settingsTerminal.png)
-    
     * Clone repository
         * In IntelliJ: 
         
